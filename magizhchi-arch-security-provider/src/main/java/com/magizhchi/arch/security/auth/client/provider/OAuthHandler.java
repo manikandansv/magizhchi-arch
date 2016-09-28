@@ -17,10 +17,7 @@ import com.magizhchi.arch.security.auth.client.model.MagizhchiOAuthClientRequest
 import com.magizhchi.arch.security.auth.client.model.MagizhchiOAuthClientResponse;
 import com.magizhchi.arch.security.auth.client.model.OAuthClientParams;
 
-public class OAuthHandler
-    implements
-      AuthHandler<MagizhchiOAuthClientRequest, MagizhchiOAuthClientResponse>,
-      AbstractOAuthHandler {
+public class OAuthHandler implements AuthHandler<MagizhchiOAuthClientRequest, MagizhchiOAuthClientResponse>, AbstractOAuthHandler {
 
   @Override
   public int getSessionTimeout() {
