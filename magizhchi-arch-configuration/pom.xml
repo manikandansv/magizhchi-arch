@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.magizhchi.arch</groupId>
+		<artifactId>magizhchi-arch</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>magizhchi-arch-configuration</artifactId>
+	<name>magizhchi-arch-configuration</name>
+	<packaging>jar</packaging>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+			</plugin>
+
+			<!-- Attach the generated features file as an artifact, and publish to 
+				the maven repository -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.10</version>
+				<executions>
+					<execution>
+						<id>attach-artifacts</id>
+						<phase>package</phase>
+						<goals>
+							<goal>attach-artifact</goal>
+						</goals>
+						<configuration>
+							<artifacts>
+								<artifact>
+									<file>target/classes/feature/magizhchi-arch-configuration-feature.xml</file>
+									<type>xml</type>
+									<classifier>features</classifier>
+								</artifact>
+								<artifact>
+									<file>src/main/cfg/exceptions/com.magizhchi.arch.exceptions.config.api.ExceptionCodeConfiguration-OTHER_ERROR.cfg</file>
+									<type>cfg</type>
+									<classifier>OTHER_ERROR</classifier>
+								</artifact>
+							</artifacts>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-install-plugin</artifactId> 
+				<executions> <execution> <id>magizhchi-arch-configuration</id> <phase>install</phase> 
+				<goals> <goal>install-file</goal> </goals> <configuration> <groupId>${project.groupId}</groupId> 
+				<artifactId>magizhchi-arch-configuration</artifactId> <version>${project.version}</version> 
+				<packaging>cfg</packaging> <file>config/exceptions/com.magizhchi.arch.exceptions.config.api.ExceptionCodeConfiguration-OTHER_ERROR.cfg</file> 
+				</configuration> </execution> </executions> </plugin> -->
+
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.0.0 http://karaf.apache.org/xmlns/features/v1.0.0">
+	<!-- <feature name="magizhchi-arch-features">
+		<feature>magizhchi-arch-feature-exceptions</feature>
+		<feature>magizhchi-arch-feature-logging</feature>
+		<feature>magizhchi-arch-feature-mongodb</feature>
+	</feature> -->
+	<feature name="magizhchi-arch-thirdparty-features" version="${pom.version}">
+		<bundle>mvn:org.apache.commons/commons-lang3/3.4</bundle>
+	</feature>
+	
+</features>

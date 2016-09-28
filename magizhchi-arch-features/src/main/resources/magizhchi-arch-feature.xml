@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.0.0 http://karaf.apache.org/xmlns/features/v1.0.0"
+	name="magizhchi-arch-features">
+	<!-- <feature name="magizhchi-arch-features">
+		<feature>magizhchi-arch-feature-exceptions</feature>
+		<feature>magizhchi-arch-feature-logging</feature>
+		<feature>magizhchi-arch-feature-mongodb</feature>
+	</feature> -->
+	<feature name="magizhchi-arch-feature-exceptions" version="${pom.version}">
+		<feature>magizhchi-arch-exceptions-api</feature>
+		<feature>magizhchi-arch-exceptions-provider</feature>
+	</feature>
+	<feature name="magizhchi-arch-feature-logging" version="${pom.version}">
+		<feature>magizhchi-arch-logging-api</feature>
+		<feature>magizhchi-arch-logging-provider</feature>
+	</feature>
+	<feature name="magizhchi-arch-feature-mongodb" version="${pom.version}">
+		<feature>magizhchi-arch-mongodb-api</feature>
+		<feature>magizhchi-arch-mongodb-provider</feature>
+	</feature>
+	<feature name="magizhchi-arch-exceptions-api" version="${pom.version}">
+		<bundle>mvn:com.magizhchi.arch/magizhchi-arch-exceptions-api/${pom.version}</bundle>
+	</feature>
+	<feature name="magizhchi-arch-exceptions-provider" version="${pom.version}">
+		<bundle>mvn:com.magizhchi.arch/magizhchi-arch-exceptions-provider/${pom.version}</bundle>
+	</feature>
+	<feature name="magizhchi-arch-logging-api" version="${pom.version}">
+		<bundle>mvn:com.magizhchi.arch/magizhchi-arch-logging-api/${pom.version}</bundle>
+	</feature>
+	<feature name="magizhchi-arch-logging-provider" version="${pom.version}">
+		<bundle>mvn:com.magizhchi.arch/magizhchi-arch-logging-provider/${pom.version}</bundle>
+	</feature>
+	<feature name="magizhchi-arch-mongodb-api" version="${pom.version}">
+		<bundle>mvn:com.magizhchi.arch/magizhchi-arch-mongodb-api/${pom.version}</bundle>
+	</feature>
+	<feature name="magizhchi-arch-mongodb-provider" version="${pom.version}">
+		<bundle>mvn:com.magizhchi.arch/magizhchi-arch-mongodb-provider/${pom.version}</bundle>
+	</feature>
+	<feature name="magizhchi-arch-utilities-api" version="${pom.version}">
+		<bundle>mvn:com.magizhchi.arch/magizhchi-arch-utilities-api/${pom.version}</bundle>
+	</feature>
+	
+</features>

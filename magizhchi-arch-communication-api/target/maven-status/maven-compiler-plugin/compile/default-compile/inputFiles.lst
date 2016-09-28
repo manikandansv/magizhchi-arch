@@ -1,0 +1,10 @@
+/Users/manisv/Development/magizhchi/magizhchi-arch/magizhchi-arch-communication-api/src/main/java/com/magizhchi/arch/communication/entities/Response.java
+/Users/manisv/Development/magizhchi/magizhchi-arch/magizhchi-arch-communication-api/src/main/java/com/magizhchi/arch/communication/entities/AbstractMessage.java
+/Users/manisv/Development/magizhchi/magizhchi-arch/magizhchi-arch-communication-api/src/main/java/com/magizhchi/arch/communication/entities/MessageType.java
+/Users/manisv/Development/magizhchi/magizhchi-arch/magizhchi-arch-communication-api/src/main/java/com/magizhchi/arch/communication/entities/ChannelInfo.java
+/Users/manisv/Development/magizhchi/magizhchi-arch/magizhchi-arch-communication-api/src/main/java/com/magizhchi/arch/communication/services/api/MessageTypeResolverService.java
+/Users/manisv/Development/magizhchi/magizhchi-arch/magizhchi-arch-communication-api/src/main/java/com/magizhchi/arch/communication/entities/ResponseType.java
+/Users/manisv/Development/magizhchi/magizhchi-arch/magizhchi-arch-communication-api/src/main/java/com/magizhchi/arch/communication/entities/RequestType.java
+/Users/manisv/Development/magizhchi/magizhchi-arch/magizhchi-arch-communication-api/src/main/java/com/magizhchi/arch/communication/entities/RequestTypes.java
+/Users/manisv/Development/magizhchi/magizhchi-arch/magizhchi-arch-communication-api/src/main/java/com/magizhchi/arch/communication/entities/ResponseTypes.java
+/Users/manisv/Development/magizhchi/magizhchi-arch/magizhchi-arch-communication-api/src/main/java/com/magizhchi/arch/communication/entities/Request.java

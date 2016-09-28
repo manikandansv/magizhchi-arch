@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.0.0" localization="OSGI-INF/metatype/com.magizhchi.arch.exceptions.config.ExceptionCodeConfiguration">
+    <OCD id="com.magizhchi.arch.exceptions.config.ExceptionCodeConfiguration" name="%com.magizhchi.arch.exceptions.config.ExceptionCodeConfiguration.name" description="%com.magizhchi.arch.exceptions.config.ExceptionCodeConfiguration.description">
+        <AD id="exceptioncode.code" type="String" name="%com.magizhchi.arch.exceptions.config.ExceptionCodeConfiguration.exceptioncode.code.name" description="%com.magizhchi.arch.exceptions.config.ExceptionCodeConfiguration.exceptioncode.code.description"/>
+        <AD id="exceptioncode.msgId" type="String" name="%com.magizhchi.arch.exceptions.config.ExceptionCodeConfiguration.exceptioncode.msgId.name" description="%com.magizhchi.arch.exceptions.config.ExceptionCodeConfiguration.exceptioncode.msgId.description"/>
+        <AD id="exceptioncode.sevLevel" type="String" name="%com.magizhchi.arch.exceptions.config.ExceptionCodeConfiguration.exceptioncode.sevLevel.name" description="%com.magizhchi.arch.exceptions.config.ExceptionCodeConfiguration.exceptioncode.sevLevel.description"/>
+        <AD id="exceptioncode.completionState" type="String" name="%com.magizhchi.arch.exceptions.config.ExceptionCodeConfiguration.exceptioncode.completionState.name" description="%com.magizhchi.arch.exceptions.config.ExceptionCodeConfiguration.exceptioncode.completionState.description"/>
+    </OCD>
+    <Designate pid="com.magizhchi.arch.exceptions.config.ExceptionCodeConfiguration" factoryPid="com.magizhchi.arch.exceptions.config.ExceptionCodeConfiguration">
+        <Object ocdref="com.magizhchi.arch.exceptions.config.ExceptionCodeConfiguration"/>
+    </Designate>
+</metatype:MetaData>

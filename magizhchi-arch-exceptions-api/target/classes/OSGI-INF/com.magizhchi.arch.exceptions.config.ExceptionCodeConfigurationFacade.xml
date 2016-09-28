@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><components xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0">
+    <scr:component enabled="true" immediate="true" name="com.magizhchi.arch.exceptions.config.ExceptionCodeConfigurationFacade" activate="activate">
+        <implementation class="com.magizhchi.arch.exceptions.config.ExceptionCodeConfigurationFacade"/>
+        <service servicefactory="false">
+            <provide interface="com.magizhchi.arch.exceptions.config.ExceptionCodeConfigurationFacade"/>
+        </service>
+        <property name="service.pid" value="com.magizhchi.arch.exceptions.config.ExceptionCodeConfigurationFacade"/>
+        <reference name="ExceptionCodeConfiguration" interface="com.magizhchi.arch.exceptions.config.ExceptionCodeConfiguration" cardinality="0..n" policy="dynamic" bind="bindExceptionCodeConfiguration" unbind="unbindExceptionCodeConfiguration"/>
+        <reference name="configAdmin" interface="org.osgi.service.cm.ConfigurationAdmin" cardinality="1..1" policy="static" bind="bindConfigAdmin" unbind="unbindConfigAdmin"/>
+    </scr:component>
+</components>

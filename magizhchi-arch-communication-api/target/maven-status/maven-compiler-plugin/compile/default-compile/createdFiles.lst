@@ -1,0 +1,10 @@
+com/magizhchi/arch/communication/services/api/MessageTypeResolverService.class
+com/magizhchi/arch/communication/entities/AbstractMessage.class
+com/magizhchi/arch/communication/entities/RequestTypes.class
+com/magizhchi/arch/communication/entities/ResponseType.class
+com/magizhchi/arch/communication/entities/ChannelInfo.class
+com/magizhchi/arch/communication/entities/MessageType.class
+com/magizhchi/arch/communication/entities/Request.class
+com/magizhchi/arch/communication/entities/ResponseTypes.class
+com/magizhchi/arch/communication/entities/RequestType.class
+com/magizhchi/arch/communication/entities/Response.class

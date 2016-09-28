@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><components xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0">
+    <scr:component enabled="true" immediate="true" name="com.magizhchi.arch.exceptions.config.ExceptionCodeConfiguration" configuration-policy="require">
+        <implementation class="com.magizhchi.arch.exceptions.config.ExceptionCodeConfiguration"/>
+        <service servicefactory="false">
+            <provide interface="com.magizhchi.arch.exceptions.config.ExceptionCodeConfiguration"/>
+        </service>
+        <property name="exceptioncode.code"/>
+        <property name="exceptioncode.msgId"/>
+        <property name="exceptioncode.sevLevel"/>
+        <property name="exceptioncode.completionState"/>
+        <property name="service.pid" value="com.magizhchi.arch.exceptions.config.ExceptionCodeConfiguration"/>
+    </scr:component>
+</components>
