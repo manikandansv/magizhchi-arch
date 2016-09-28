@@ -265,8 +265,6 @@
 	<modules>
 		<module>magizhchi-arch-exceptions-api</module>
 		<module>magizhchi-arch-exceptions-provider</module>
-		<module>magizhchi-arch-logging-api</module>
-		<module>magizhchi-arch-logging-provider</module>
 		<module>magizhchi-arch-mongodb-api</module>
 		<module>magizhchi-arch-mongodb-provider</module>
 		<module>magizhchi-arch-features</module>

@@ -19,9 +19,9 @@ public interface ServiceFacade {
    * Process request.
    * 
    * @param request the request
-   * @throws BaseException the TOM exception
+   * @throws BaseException
    */
-  public void processRequest(MagizhchiInboundRequest request); //throws BaseException;
+  public void processRequest(MagizhchiInboundRequest request); // throws BaseException;
 
   /**
    * Returns whether the service is transacted.

@@ -40,7 +40,7 @@ public class Notification implements Comparable<Notification>, Serializable {
   /**
    * Notification code of the given notification.
    * 
-   * @author OFIP TA
+   * @author manisv
    */
   public static class NotificationCode extends AbstractNotificationCode {
 
