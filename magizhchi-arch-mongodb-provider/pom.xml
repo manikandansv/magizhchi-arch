@@ -67,17 +67,26 @@
 		</dependency>
 		<dependency>
 			<groupId>com.magizhchi.arch</groupId>
-			<artifactId>magizhchi-arch-logging-api</artifactId>
+			<artifactId>magizhchi-arch-exceptions-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>bundle</type>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.magizhchi.arch</groupId>
-			<artifactId>magizhchi-arch-exceptions-api</artifactId>
+			<artifactId>magizhchi-arch-utilities-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>bundle</type>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.servicemix.bundles</groupId>
+			<artifactId>org.apache.servicemix.bundles.mongodb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jongo</groupId>
+			<artifactId>jongo</artifactId>
+		</dependency>
+
 	</dependencies>
 </project>
