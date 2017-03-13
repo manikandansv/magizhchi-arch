@@ -8,7 +8,13 @@ import org.jongo.ResultHandler;
 
 import com.mongodb.DBObject;
 
-public interface MongoCrudService<T extends Model> {
+public interface MongoManager<T extends MagizhchiMongoModel> {
+  
+  /**
+   * 
+   * @return
+   */
+  MongoCollection getMongoCollection(String clientId, String dbName, String collectionName);
 
   /**
    * Specifies what is the default limit
@@ -173,58 +179,6 @@ public interface MongoCrudService<T extends Model> {
    */
   List<T> aggregate(String pipeline);
 
-  /**
-   *
-   * determines if a collection is to be versioned
-   * 
-   * @return true if versioned, false otherwise
-   */
-  boolean isVersioned();
-
-  /**
-   * By convention, the name of the history collection becomes collection.history i.e if a
-   * collection is called users, its shadow history collection will be called
-   * <code>users.history</code>
-   *
-   * Hence this method should return history if history is to be added at the end
-   * 
-   * @return
-   */
-  String getCollectionSuffix();
-
-  /**
-   * Actually write the history based on the strategy. Some strategy might return a new document,
-   * another strategy might return a diff only. or simply some audit data.
-   *
-   * Regardless, whatever the strategy returns, persist it
-   * 
-   * @param strategy
-   * @return
-   */
-  void writeHistory(MongoCollection collection,ObjectId id, T t);
-
-  /**
-   * Delete history for the given object removes all objects
-   * 
-   * @param referenceId
-   */
-  void deleteHistory(ObjectId referenceId);
-
-  /**
-   * Retrieve a specific version
-   * 
-   * @param referenceId
-   * @param version
-   * @return
-   */
-  T getVersion(ObjectId referenceId, int version);
-
-  /**
-   * List all versions
-   * 
-   * @param referenceId
-   * @return
-   */
-  List<T> listVersions(ObjectId referenceId);
+  List<T> aggregate(T obj, String... pipeline);
 
 }

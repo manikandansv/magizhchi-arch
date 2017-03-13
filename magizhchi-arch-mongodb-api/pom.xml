@@ -72,5 +72,11 @@
 			<groupId>org.jongo</groupId>
 			<artifactId>jongo</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.magizhchi.arch</groupId>
+			<artifactId>magizhchi-arch-utilities-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+
+		</dependency>
 	</dependencies>
 </project>

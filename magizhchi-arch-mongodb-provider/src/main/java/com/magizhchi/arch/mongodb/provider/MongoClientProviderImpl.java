@@ -10,7 +10,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;
-import org.apache.felix.scr.annotations.ConfigurationPolicy;
+import org.apache.felix.scr.annotations.Deactivate;
 import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Service;
 import org.osgi.service.component.ComponentContext;
@@ -25,9 +25,8 @@ import com.mongodb.Tag;
 import com.mongodb.TagSet;
 import com.mongodb.WriteConcern;
 
-@Service(value=MongoClientProvider.class, serviceFactory = true)
-@Component(enabled = true, immediate = true, configurationFactory = true, policy = ConfigurationPolicy.REQUIRE,
-           metatype = true)
+@Service(value = MongoClientProvider.class)
+@Component(enabled = true, immediate = true, metatype = true)
 public class MongoClientProviderImpl implements MongoClientProvider {
 
   @Property(name = PROP_CLIENT_ID, label = "Client Id")
@@ -139,6 +138,17 @@ public class MongoClientProviderImpl implements MongoClientProvider {
     }
 
   }
+  
+  @Deactivate
+  protected void deactivate(ComponentContext ctx){
+    
+    if (mongoClient != null){
+      
+      mongoClient.close();
+      
+    }
+    
+  }
 
   @SuppressWarnings("deprecation")
   private MongoClientOptions createMongoClientOptions() {
@@ -205,12 +215,12 @@ public class MongoClientProviderImpl implements MongoClientProvider {
   private MongoClient createMongoClient(List<String> uriList, MongoClientOptions options) {
 
     String currentURI = null;
-    
+
     List<ServerAddress> serverAddresses = new ArrayList<>(uris.size());
     try {
 
       for (String uri : uriList) {
-        
+
         currentURI = uri;
 
         serverAddresses.add(createServerAddress(currentURI));

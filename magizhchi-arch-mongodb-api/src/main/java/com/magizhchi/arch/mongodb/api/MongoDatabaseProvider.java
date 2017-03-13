@@ -14,8 +14,8 @@ public interface MongoDatabaseProvider {
   String PROP_PASSWORD = "mongodatabaseprovider.property.password";
 
   String PROP_CLIENT_FILTER = "mongodatabaseprovider.property.clientfilter";
-
-  MongoDatabase getMongoDatabase();
+  
+  String PROP_COLLECTIONS = "mongodatabaseprovider.property.collections";
 
   String getDatabaseAlias();
 
@@ -27,6 +27,10 @@ public interface MongoDatabaseProvider {
 
   String getClientFilter();
 
-  DB getMongoDatabaseDeprecated();
+  MongoDatabase getMongoDatabase(MongoClientProvider mongoClientProvider);
+
+  DB getMongoDatabaseDeprecated(MongoClientProvider mongoClientProvider);
+
+  String[] getCollections();
 
 }

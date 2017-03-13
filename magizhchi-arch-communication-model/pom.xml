@@ -68,5 +68,15 @@
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.magizhchi.arch</groupId>
+			<artifactId>magizhchi-arch-utilities-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			
+		</dependency>
+		<dependency>
+			 <groupId>com.jcraft</groupId>
+            <artifactId>jsch</artifactId>
+		</dependency>
 	</dependencies>
 </project>

@@ -1,9 +1,8 @@
 package com.magizhchi.arch.serviceexecution.api;
 
 import com.magizhchi.arch.communication.model.MagizhchiInboundRequest;
-import com.magizhchi.arch.communication.model.MagizhchiInboundRequestType;
+import com.magizhchi.arch.communication.model.MagizhchiMessage;
 import com.magizhchi.arch.communication.model.MagizhchiOutboundResponse;
-import com.magizhchi.arch.communication.model.MagizhchiOutboundResponseType;
 import com.magizhchi.arch.exceptions.exceptions.BaseException;
 
 /**
@@ -47,11 +46,11 @@ public abstract class AbstractServiceFacade implements ServiceFacade {
 
   /** {@inheritDoc} */
   @Override
-  public abstract MagizhchiInboundRequestType getRequestMessageType();
+  public abstract MagizhchiMessage getRequestMessage();
 
   /** {@inheritDoc} */
   @Override
-  public abstract MagizhchiOutboundResponseType getResponseMessageType();
+  public abstract MagizhchiMessage getResponseMessage();
 
   /**
    * Compose response.
@@ -60,7 +59,7 @@ public abstract class AbstractServiceFacade implements ServiceFacade {
    * @return the response
    */
   public MagizhchiOutboundResponse composeResponse(MagizhchiInboundRequest request) {
-    return createResponse(getResponseMessageType(), request);
+    return createResponse(getResponseMessage(), request);
   }
 
   /**
@@ -86,9 +85,9 @@ public abstract class AbstractServiceFacade implements ServiceFacade {
    * @param request Request object
    * @return Response object
    */
-  private MagizhchiOutboundResponse createResponse(MagizhchiOutboundResponseType messageType, MagizhchiInboundRequest request) {
+  private MagizhchiOutboundResponse createResponse(MagizhchiMessage message, MagizhchiInboundRequest request) {
     MagizhchiOutboundResponse response = new MagizhchiOutboundResponse();
-    response.setMessageType(messageType);
+    response.setMagizhchiMessage(message);
     response.setMessageId(request.getMessageId());
     response.setContent(null);
     response.setServiceExecutionDuration(System.currentTimeMillis() - request.getTimeSent());

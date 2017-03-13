@@ -17,26 +17,28 @@ import org.jongo.MongoCollection;
 import org.jongo.ResultHandler;
 import org.osgi.service.component.ComponentContext;
 
-import com.magizhchi.arch.mongodb.api.Model;
-import com.magizhchi.arch.mongodb.api.MongoCrudService;
+import com.magizhchi.arch.mongodb.api.MagizhchiMongoModel;
+import com.magizhchi.arch.mongodb.api.MongoClientProvider;
 import com.magizhchi.arch.mongodb.api.MongoDatabaseProvider;
+import com.magizhchi.arch.mongodb.api.MongoDatabaseProviderFactory;
+import com.magizhchi.arch.mongodb.api.MongoManager;
 import com.magizhchi.arch.utilities.api.PropertiesUtil;
+import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.WriteResult;
 
 @Component(enabled = true, immediate = true)
 @Service
-public class DefaultMongoCrudService<T extends Model> implements MongoCrudService<T> {
-
-  protected String m_collectionName;
+public class MongoManagerImpl<T extends MagizhchiMongoModel> implements MongoManager<T> {
 
   private Class<T> m_clazz;
 
   @Reference
-  private MongoDatabaseProvider mongoDatabaseProvider;
+  private MongoClientProvider mongoClientProvider;
 
-  private MongoCollection mongoCollection;
+  @Reference
+  private MongoDatabaseProviderFactory mongoDatabaseProviderFactory;
 
   public static final String DEFAULT_READ_LIMIT = "default.readLimit";
 
@@ -48,27 +50,25 @@ public class DefaultMongoCrudService<T extends Model> implements MongoCrudServic
     this.limit = PropertiesUtil.toInteger(ctx.getProperties().get(DEFAULT_READ_LIMIT), 10);
   }
 
-  public DefaultMongoCrudService() {}
+  private MongoCollection init(T obj) {
+    
+    String collectionName = obj.getCollectionName();
 
-  /**
-   * Constructor to setup the collection and generic type of this CRUD service.
-   * 
-   * @param collectionName The collection name in Mongo
-   * @param clazz The type to work with in this CRUD service.
-   */
-  public DefaultMongoCrudService(String collectionName, Class<T> clazz) {
-    m_collectionName = collectionName;
-    m_clazz = clazz;
-  }
+    MongoDatabaseProvider mongoDatabaseProvider = mongoDatabaseProviderFactory.getMongoDatabaseProviderByCollectionName(collectionName);
 
-  public void start() {
-    mongoCollection = new Jongo(mongoDatabaseProvider.getMongoDatabaseDeprecated()).getCollection(m_collectionName);
+    DB db = mongoDatabaseProvider.getMongoDatabaseDeprecated(mongoClientProvider);
+
+    MongoCollection mongoCollection = new Jongo(db).getCollection(collectionName);
+    
+    return mongoCollection;
   }
 
   protected void ensureIndex() {};
 
   @Override
   public Object save(T obj) {
+    
+    MongoCollection mongoCollection = init(obj);
 
     WriteResult saveResult = mongoCollection.save(obj);
 
@@ -80,6 +80,8 @@ public class DefaultMongoCrudService<T extends Model> implements MongoCrudServic
 
     }
 
+    destroy();
+    
     return saveId;
   }
 
@@ -90,7 +92,12 @@ public class DefaultMongoCrudService<T extends Model> implements MongoCrudServic
    */
   @Override
   public void delete(String id) {
+    
+    MongoCollection mongoCollection = init(obj);
+    
     mongoCollection.remove(new ObjectId(id));
+    
+    destroy();
   }
 
   /**
@@ -205,7 +212,8 @@ public class DefaultMongoCrudService<T extends Model> implements MongoCrudServic
   @Override
   public String listJSON(int limit, int skip, DBObject query, DBObject fields) {
 
-    DBCollection col = mongoDatabaseProvider.getMongoDatabaseDeprecated().getCollection(this.m_collectionName);
+    DBCollection col =
+        mongoDatabaseProvider.getMongoDatabaseDeprecated(mongoClientProvider).getCollection(this.m_collectionName);
 
     return col.find(query, fields).limit(limit).skip(skip).toArray().toString();
 
@@ -303,43 +311,47 @@ public class DefaultMongoCrudService<T extends Model> implements MongoCrudServic
     return copy;
   }
 
+  /**
+   * Aggregate
+   *
+   * @param pipeline - multiple pipelines
+   * @return
+   */
+  @SuppressWarnings("unchecked")
   @Override
-  public boolean isVersioned() {
-    return false;
-  }
+  public List<T> aggregate(T obj, String... pipeline) {
 
-  @Override
-  public String getCollectionSuffix() {
-    return ".history";
-  }
+    List<T> outputList = new ArrayList<T>();
 
-  @Override
-  public void deleteHistory(ObjectId referenceId) {
-    mongoCollection.remove("{ref : #}", referenceId);
-  }
-
-  @Override
-  public T getVersion(ObjectId referenceId, int version) {
-    return null;
-  }
-
-  @Override
-  public List<T> listVersions(ObjectId referenceId) {
-    return null;
-  }
-
-  @Override
-  public void writeHistory(MongoCollection collection, ObjectId id, T t) {
-
-    if (isVersioned()) {
-
-      t.setId(null);
-
-      t.setReference(id);
-
-      collection.save(t);
+    int i = 0;
+    Aggregate agr = null;
+    for (String p : pipeline) {
+      if (i == 0) {
+        agr = mongoCollection.aggregate(p);
+      } else {
+        agr = agr.and(p);
+      }
     }
 
+    ResultsIterator<T> itr = agr.as((Class<T>) obj.getClass());
+
+    while (itr.hasNext()) {
+      outputList.add(itr.next());
+    }
+
+    return outputList;
+  }
+
+  @Override
+  public MongoCollection getMongoCollection(String clientId, String dbName, String collectionName) {
+
+    MongoDatabaseProvider mongoDatabaseProvider = mongoDatabaseProviderFactory.getMongoDatabaseProvider(dbName);
+
+    DB db = mongoDatabaseProvider.getMongoDatabaseDeprecated(mongoClientProvider);
+
+    MongoCollection mongoCollection = new Jongo(db).getCollection(collectionName);
+
+    return mongoCollection;
   }
 
 }

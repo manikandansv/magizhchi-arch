@@ -5,7 +5,6 @@ import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.ConfigurationPolicy;
 import org.apache.felix.scr.annotations.Property;
-import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
 import org.osgi.service.component.ComponentContext;
 
@@ -19,9 +18,6 @@ import com.mongodb.client.MongoDatabase;
 @Component(enabled = true, immediate = true, configurationFactory = true, policy = ConfigurationPolicy.REQUIRE,
            metatype = true)
 public class MongoDatabaseProviderImpl implements MongoDatabaseProvider {
-
-  @Reference
-  private MongoClientProvider mongoClientProvider;
 
   @Property(name = PROP_ALIAS, label = "Database Alias")
   private String databaseAlias;
@@ -37,6 +33,9 @@ public class MongoDatabaseProviderImpl implements MongoDatabaseProvider {
 
   @Property(name = PROP_CLIENT_FILTER, label = "MongoDB client reference filter")
   private String clientFilter;
+  
+  @Property(name = PROP_COLLECTIONS, label = "Collections in this DB")
+  private String[] collections;
 
   @Activate
   protected void activate(ComponentContext ctx) {
@@ -45,10 +44,11 @@ public class MongoDatabaseProviderImpl implements MongoDatabaseProvider {
     this.userName = PropertiesUtil.toString(ctx.getProperties().get(PROP_USERNAME), StringUtils.EMPTY);
     this.password = PropertiesUtil.toString(ctx.getProperties().get(PROP_PASSWORD), StringUtils.EMPTY);
     this.clientFilter = PropertiesUtil.toString(ctx.getProperties().get(PROP_CLIENT_FILTER), StringUtils.EMPTY);
+    this.collections = PropertiesUtil.toStringArray(ctx.getProperties().get(PROP_COLLECTIONS), new String[]{});
   }
 
   @Override
-  public MongoDatabase getMongoDatabase() {
+  public MongoDatabase getMongoDatabase(MongoClientProvider mongoClientProvider) {
 
     return mongoClientProvider.getMongoClient().getDatabase(databaseName);
 
@@ -56,7 +56,7 @@ public class MongoDatabaseProviderImpl implements MongoDatabaseProvider {
 
   @SuppressWarnings("deprecation")
   @Override
-  public DB getMongoDatabaseDeprecated() {
+  public DB getMongoDatabaseDeprecated(MongoClientProvider mongoClientProvider) {
 
     return mongoClientProvider.getMongoClient().getDB(databaseName);
 
@@ -88,6 +88,10 @@ public class MongoDatabaseProviderImpl implements MongoDatabaseProvider {
     return clientFilter;
   }
 
+  @Override
+  public String[] getCollections(){
+    return collections;
+  }
 
 
 }

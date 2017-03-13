@@ -10,12 +10,16 @@ import java.util.List;
  * @author manisv
  *
  */
-public class MagizhchiOutboundResponse extends AbstractMessage {
+public class MagizhchiOutboundResponse {
 
   /**
 	 * 
 	 */
   private static final long serialVersionUID = -6145526372228865404L;
+  
+  private String messageId;
+  
+  private MagizhchiMessage magizhchiMessage;
 
   /** The content. */
   private Object content;
@@ -149,5 +153,27 @@ public class MagizhchiOutboundResponse extends AbstractMessage {
   public void setServiceExecutionDuration(long serviceExecutionDuration) {
     this.serviceExecutionDuration = serviceExecutionDuration;
   }
+
+  public String getMessageId() {
+    return messageId;
+  }
+
+  public void setMessageId(String messageId) {
+    this.messageId = messageId;
+  }
+
+  public MagizhchiMessage getMagizhchiMessage() {
+    return magizhchiMessage;
+  }
+
+  public void setMagizhchiMessage(MagizhchiMessage magizhchiMessage) {
+    this.magizhchiMessage = magizhchiMessage;
+  }
+
+  public void setExceptionResponse(boolean exceptionResponse) {
+    this.exceptionResponse = exceptionResponse;
+  }
+  
+  
 
 }

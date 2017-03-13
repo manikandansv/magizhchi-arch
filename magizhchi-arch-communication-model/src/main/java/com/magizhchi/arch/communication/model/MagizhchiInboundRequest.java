@@ -9,12 +9,16 @@ import java.util.List;
  * @author manisv
  *
  */
-public class MagizhchiInboundRequest extends AbstractMessage {
+public class MagizhchiInboundRequest  {
 
   /**
 	 * 
 	 */
   private static final long serialVersionUID = -2061739442137669136L;
+  
+  private String messageId;
+  
+  private MagizhchiMessage magizhchiMessage;
 
   /** The content list. */
   private List<?> contentList;
@@ -152,4 +156,22 @@ public class MagizhchiInboundRequest extends AbstractMessage {
     this.channel = channel;
   }
 
+  public String getMessageId() {
+    return messageId;
+  }
+
+  public void setMessageId(String messageId) {
+    this.messageId = messageId;
+  }
+
+  public MagizhchiMessage getMagizhchiMessage() {
+    return magizhchiMessage;
+  }
+
+  public void setMagizhchiMessage(MagizhchiMessage magizhchiMessage) {
+    this.magizhchiMessage = magizhchiMessage;
+  }
+
+  
+  
 }

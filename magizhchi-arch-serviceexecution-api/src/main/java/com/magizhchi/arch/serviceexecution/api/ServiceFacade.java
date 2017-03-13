@@ -2,6 +2,7 @@ package com.magizhchi.arch.serviceexecution.api;
 
 import com.magizhchi.arch.communication.model.MagizhchiInboundRequest;
 import com.magizhchi.arch.communication.model.MagizhchiInboundRequestType;
+import com.magizhchi.arch.communication.model.MagizhchiMessage;
 import com.magizhchi.arch.communication.model.MagizhchiOutboundResponse;
 import com.magizhchi.arch.communication.model.MagizhchiOutboundResponseType;
 import com.magizhchi.arch.exceptions.exceptions.BaseException;
@@ -14,6 +15,12 @@ import com.magizhchi.arch.exceptions.exceptions.BaseException;
  *
  */
 public interface ServiceFacade {
+  
+  String SVC_INBOUND_REQ_MSG_CODE = "svc.inbound.req.msg.code";
+  
+  String SVC_OUTBOUND_RESP_MSG_CODE = "svc.outbound.resp.msg.code";
+  
+  String SVC_NAME = "svc.name";
 
   /**
    * Process request.
@@ -53,13 +60,17 @@ public interface ServiceFacade {
    * 
    * @return the request message type
    */
-  public MagizhchiInboundRequestType getRequestMessageType();
+  public MagizhchiMessage getRequestMessage();
 
   /**
    * Returns the response message type.
    * 
    * @return the response message type
    */
-  public MagizhchiOutboundResponseType getResponseMessageType();
+  public MagizhchiMessage getResponseMessage();
+
+  String getReqMsgCode();
+
+  String getRespMsgCode();
 
 }
